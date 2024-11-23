@@ -8,6 +8,7 @@ const Weather = () => {
   const [loaded, setLoaded] = useState(false);
   const [message, setMessage] = useState();
   const apiKey = import.meta.env.VITE_API_KEY;
+  console.log("Hello")
 
   const showTemperature = (response) => {
     setLoaded(true);
