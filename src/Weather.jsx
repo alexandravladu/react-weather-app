@@ -7,6 +7,7 @@ const Weather = () => {
   const [city, setCity] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [message, setMessage] = useState();
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   const showTemperature = (response) => {
     setLoaded(true);
@@ -21,7 +22,7 @@ const Weather = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a94f3778290bfeee61278505dbbe51d&units=metric`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(url).then(showTemperature);
     setMessage(`The weather in ${city} is: `);
   };
