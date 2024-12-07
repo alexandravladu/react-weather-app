@@ -10,7 +10,7 @@ function App() {
       <div className='container'>
         <h1> Weather App </h1>
         <br />
-        <NewWeather />
+        <NewWeather defaultCity="London"/>
       </div>
       <footer>
         This project was created by Alexandra Vladu and it is {" "}
@@ -20,4 +20,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
