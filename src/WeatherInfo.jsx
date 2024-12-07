@@ -2,6 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import FormattedDate from './FormattedDate';
+import WeatherTemperature from './WeatherTemperature';
 
 
 const WeatherInfo = (props) => {
@@ -17,8 +18,7 @@ const WeatherInfo = (props) => {
             <div className="clearfix">
               <img src={props.data.icon} alt={props.data.description} className="float-left"/>
               {/* <div className="float-left"> */}
-              <span className="temperature">{Math.round(props.data.temperature)}</span>
-              <span className="unit">°C</span>
+              <WeatherTemperature celsius={props.data.temperature} />
               {/* </div> */}
               </div>
           </div>
