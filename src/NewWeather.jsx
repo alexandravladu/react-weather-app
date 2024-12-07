@@ -3,7 +3,6 @@
 import React, {useState} from 'react';
 import "./Weather.css";
 import WeatherInfo from './WeatherInfo';
-// import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const NewWeather = (props) => {
@@ -56,12 +55,6 @@ const NewWeather = (props) => {
   } else {
    search()
   }
-  
-
 }
-
-// NewWeather.propTypes = {
-//   defaultCity: PropTypes.string.isRequired,
-// };
 
 export default NewWeather;
