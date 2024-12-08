@@ -2,7 +2,7 @@
 import React from 'react';
 import FormattedDate from './FormattedDate';
 import WeatherTemperature from './WeatherTemperature';
-import './WeatherInfo.css';
+
 
 const WeatherInfo = (props) => {
   return (

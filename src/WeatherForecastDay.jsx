@@ -23,8 +23,8 @@ const WeatherForecastDay = (props) => {
         <img
         src={props.data.condition.icon_url}
         alt={props.data.condition.icon}
-        width={40}
-        height={40}
+        width={70}
+        height={70}
       />
         <div className="WeatherForecast-temperatures">
           <span className="WeatherForecast-temperature-max">{maxTemperature()} </span>

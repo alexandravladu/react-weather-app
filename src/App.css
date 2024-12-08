@@ -1,13 +1,18 @@
 .App {
-  max-width: 600px;
-  margin: 30px auto;
+  max-width: 700px;
+  margin: 100px auto;
 }
+
 
 .App footer {
-  font-size: 12px;
+  font-size: 15px;
   margin: 10px 0; 
+  text-align: center;
 }
 
-.App .title {
-  text-align: center;
+
+body {
+  background-image: url("/src/images/back.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
