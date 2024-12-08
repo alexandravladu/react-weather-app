@@ -1,74 +1,63 @@
-// eslint-disable-next-line no-unused-vars
-import React, {useState} from "react";
-import axios from "axios";
+/* eslint-disable react/prop-types */
+ 
+import React, {useState} from 'react';
+import "./Weather.css";
+import WeatherInfo from './WeatherInfo';
+import WeatherForecast from './WeatherForecast';
+import axios from 'axios';
 
-
-
-const Weather = () => {
-  const [weather, setWeather] = useState({});
-  const [city, setCity] = useState("");
-  const [loaded, setLoaded] = useState(false);
-  const [message, setMessage] = useState();
-  const apiKey = import.meta.env.VITE_API_KEY;
-  console.log("Hello")
-
-  const showTemperature = (response) => {
-    setLoaded(true);
-    setWeather({
-      temperature: response.data.main.temp,
-      description: response.data.weather[0].description,
-      humidity: response.data.main.humidity,
+const NewWeather = (props) => {
+  const [weatherData, setWeatherData] = useState({ready: false});
+  const [city, setCity] = useState(props.defaultCity)
+  const handleResponse = (response) => {
+    console.log(response.data);
+    setWeatherData({
+      ready: true,
+      coordinates: response.data.coordinates,
+      temperature: response.data.temperature.current,
+      city: response.data.city,
+      description: response.data.condition.description,
+      humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-    });
-  };
+      date: new Date(response.data.time * 1000),
+      icon: `https://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
+  });
+  }
+  const search = () => {
+    const apiKey = import.meta.env.VITE_API_KEY;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(url).then(showTemperature);
-    setMessage(`The weather in ${city} is: `);
+    //search for a city
+    search()
   };
-
-  const updateCity = (event) => {
+  const handleCityChange = (event) => {
     setCity(event.target.value);
-  };
-
-  let form = (
-    <form onSubmit={handleSubmit}>
-      <input type="search" onChange={updateCity} placeholder="Search..." />
-      <input type="submit" value="Search" />
-    </form>
-  );
-
-  if (loaded) {
-    return (
-      <div>
-        {form}
-        <br />
-        <h2>{message} </h2>
-        <ul>
-          <li>
-            Temperature: <strong> {Math.round(weather.temperature)}°C </strong>
-          </li>
-          <li>
-            Description: <strong> {weather.description} </strong>
-          </li>
-          <li>
-            Humidity: <strong> {weather.humidity}% </strong>{" "}
-          </li>
-          <li>
-            Wind: <strong> {weather.wind}km/h </strong>{" "}
-          </li>
-          <li>
-            <img src={weather.icon} alt={weather.description} />
-          </li>
-        </ul>
-      </div>
-    );
-  } else {
-    return form;
   }
-};
 
-export default Weather;
+  if (weatherData.ready) {
+    return (
+      <div className='Weather'>
+          <form onSubmit={handleSubmit}>
+              <div className="row">
+                  <div className="col-9">
+              <input type="search" placeholder="Search for a city" className="form-control" autoFocus="on" onChange={handleCityChange} />
+              </div>
+              <div className="col-3">
+              <input type="submit" value="Search"  className="btn btn-primary w-100"/>
+              </div>
+              </div>
+          </form>
+          <WeatherInfo data={weatherData} />
+          <WeatherForecast coordinates={weatherData.coordinates}/>
+          </div>
+    )
+  } else {
+   search()
+  }
+}
+
+export default NewWeather;

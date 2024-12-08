@@ -1,10 +1,8 @@
+/* eslint-disable react/react-in-jsx-scope */
 import './App.css'
-// import Weather from './Weather';
-import NewWeather from './NewWeather';
+import NewWeather from './Weather';
 
 function App() {
-
-
   return (
     <div className='App'>
       <div className='container'>
@@ -14,7 +12,7 @@ function App() {
       </div>
       <footer>
         This project was created by Alexandra Vladu and it is {" "}
-        <a href="https://github.com/alexandravladu/react-weather-app" target="_blank">open-source</a> and hosted on <a href="https://soft-meerkat-5f05ce.netlify.app/" target="_blank">Netlify.</a>
+        <a href="https://github.com/alexandravladu/react-weather-app" target="_blank" rel="noreferrer">open-source</a> and hosted on <a href="https://soft-meerkat-5f05ce.netlify.app/" target="_blank" rel="noreferrer">Netlify.</a>
       </footer>
     </div>
   )
