@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
- 
-import React, {useState, useEffect} from 'react';
+ import React, {useState, useEffect} from 'react';
 import "./WeatherForecast.css";
 import WeatherForecastDay from './WeatherForecastDay';
 import axios from 'axios';
@@ -14,7 +13,7 @@ const WeatherForecast = (props) => {
 
     },[props.coordinates]);
 
-    
+
     const handleResponse = (response) => {
         console.log(response.data);
         setForecast(response.data.daily);
@@ -33,15 +32,17 @@ const WeatherForecast = (props) => {
     if (loaded) {
         console.log(forecast);
         return (
-            <div className='WeatherForecast'>
+        <div className='WeatherForecast'>
             <div className="row">
                 {forecast.map(function(dailyForecast, index){
                     if (index < 5) {
                         return (
                             <div className="col" key={index}>
-                            <WeatherForecastDay data={dailyForecast} />
+                                <WeatherForecastDay data={dailyForecast} />
                             </div>
-                        )
+                        );
+                    }  else {
+                        return null;
                     }
                 })}
             </div>  
